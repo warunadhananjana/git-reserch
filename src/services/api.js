@@ -12,6 +12,7 @@ const api = axios.create({
 export const productService = {
   getAllProducts: async () => {
     const response = await api.get('/products');
+    console.log("productss",response)
     return response.data;
   },
 

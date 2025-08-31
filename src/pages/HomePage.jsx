@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { ChevronRight } from "lucide-react";
-import { productService } from "../services/api";
-import ProductCard from "../components/Product/ProductCard";
+import React, { useState, useEffect } from 'react';
+import { ChevronRight } from 'lucide-react';
+import { productService } from '../services/api';
+import ProductCard from '../components/Product/ProductCard';
 
 const HomePage = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const [subscribeLoading, setSubscribeLoading] = useState(false);
   const [subscribeMessage, setSubscribeMessage] = useState(null);
   const safeJSONParse = (jsonString, fallback = {}) => {
     try {
       return JSON.parse(jsonString);
     } catch (err) {
-      console.error("Error parsing JSON:", err);
+      console.error('Error parsing JSON:', err);
       return fallback;
     }
   };
@@ -37,8 +37,8 @@ const HomePage = () => {
         setFeaturedProducts(processedProducts);
         setError(null);
       } catch (err) {
-        setError("Failed to load featured products. Please try again later.");
-        console.error("Error fetching featured products:", err);
+        setError('Failed to load featured products. Please try again later.');
+        console.error('Error fetching featured products:', err);
       } finally {
         setLoading(false);
       }
@@ -55,16 +55,16 @@ const HomePage = () => {
     try {
       await productService.subscribeNewsletter(email);
       setSubscribeMessage({
-        type: "success",
-        text: "Successfully subscribed to newsletter!",
+        type: 'success',
+        text: 'Successfully subscribed to newsletter!',
       });
-      setEmail("");
+      setEmail('');
     } catch (err) {
       setSubscribeMessage({
-        type: "error",
-        text: "Failed to subscribe. Please try again.",
+        type: 'error',
+        text: 'Failed to subscribe. Please try again.',
       });
-      console.error("Error subscribing to newsletter:", err);
+      console.error('Error subscribing to newsletter:', err);
     } finally {
       setSubscribeLoading(false);
     }
@@ -72,7 +72,7 @@ const HomePage = () => {
 
   return (
     <div className="space-y-8">
-      <section className="relative h-96 bg-gray-900 rounded-xl overflow-hidden">
+      <section className="relative h-100 bg-gray-900 rounded-xl overflow-hidden">
         <img
           src="/images/22.jpg"
           alt="Hero"
@@ -139,15 +139,15 @@ const HomePage = () => {
               disabled={subscribeLoading}
               className="bg-blue-600 text-white px-6 py-2 rounded-r-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {subscribeLoading ? "Subscribing..." : "Subscribe"}
+              {subscribeLoading ? 'Subscribing...' : 'Subscribe'}
             </button>
           </div>
           {subscribeMessage && (
             <p
               className={`mt-2 text-sm ${
-                subscribeMessage.type === "success"
-                  ? "text-green-600"
-                  : "text-red-600"
+                subscribeMessage.type === 'success'
+                  ? 'text-green-600'
+                  : 'text-red-600'
               }`}
             >
               {subscribeMessage.text}
